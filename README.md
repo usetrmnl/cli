@@ -12,7 +12,7 @@ this repo contains the logic for our CLI, powered by [Terminalwire](https://term
 
 code inside `lib/` is not intended to run independently of the core TRMNL web server. it does, however, showcase design choices and hierarchy of available CRUD behaviors.
 
-we open feedback and contributions to the following areas:
+we are open to feedback and contributions to the following areas:
 
 - attributes and formatting via `list` style commands, ex `trmnl plugins ls`
 - CLI-only "go" actions that commit write operations, ex `trmnl go shopping_list <item>`
