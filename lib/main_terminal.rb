@@ -1,7 +1,7 @@
 class MainTerminal < ApplicationTerminal
   VERSION = '0.0.1'.freeze
 
-  desc "login", "Login to your account"
+  desc "login", "Log in to your account"
   def login
     print "Email: "
     email = gets.chomp
@@ -49,7 +49,7 @@ class MainTerminal < ApplicationTerminal
     puts VERSION
   end
 
-  desc "logout", "Logout of your account"
+  desc "logout", "Log out of your account"
   def logout
     session.reset
     puts "Successfully logged out."
