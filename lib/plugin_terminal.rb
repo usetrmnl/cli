@@ -29,7 +29,7 @@ class PluginTerminal < ApplicationTerminal
     return unless authenticate_user!
 
     name = name.join(' ').downcase
-    plugin = current_user.plugins.find_by("lower(name) = ?", name)
+    plugin = current_user.plugins.find_by("lower(name) = ?", name) || current_user.plugin_settings.find_by("lower(name) = ?", name)
 
     if plugin
       shell.say "plugin attributes: #{plugin.attributes}"
