@@ -10,7 +10,7 @@ every endpoint in our [API](https://trmnl.com/api-docs) is a command here. 140 o
 2. explore commands (`trmnl --help`)
 3. run one (`trmnl list-devices`)
 
-the first command that touches your account opens trmnl.com in your browser. pick what the CLI may do (read, content, devices, delete, profile, apps), click approve, done. no API keys to copy paste.
+the first command that touches your account opens trmnl.com in your browser. pick what the CLI may do (read, content, devices, delete, profile, apps), click allow, done. no API keys to copy paste.
 
 ## examples
 
