@@ -11,3 +11,18 @@ archives:
     format_overrides:
       - goos: windows
         formats: [zip]
+homebrew_casks:
+  - name: trmnl
+    description: The TRMNL API as a command line
+    homepage: https://github.com/usetrmnl/cli
+    repository:
+      owner: usetrmnl
+      name: homebrew-tap
+      token: "{{ .Env.HOMEBREW_TAP_TOKEN }}"
+    hooks:
+      post:
+        # The binary is not signed by Apple, so Gatekeeper would refuse the first run.
+        install: |
+          if OS.mac?
+            system_command "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "#{staged_path}/trmnl"]
+          end
