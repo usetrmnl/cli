@@ -25,7 +25,7 @@ changed your mind about access? remove "TRMNL CLI" from [Connected agents](https
 
 ## scripts + CI
 
-no browser? no problem. create an API key under [Account > API keys](https://trmnl.com/account), give it only the capabilities it needs, then:
+no browser? no problem. create an API key under [Account API keys](https://trmnl.com/account), give it only the capabilities it needs, then:
 
 ```sh
 export TRMNL_API_KEY=trmnl_xxxxx
