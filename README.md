@@ -34,6 +34,8 @@ trmnl list-devices
 
 when `TRMNL_API_KEY` is set the CLI uses it and skips the browser entirely.
 
+API keys show up once your account has a [Developer edition](https://shop.trmnl.com/products/developer-edition) device (every BYOD license includes it). browser sign in works for everyone.
+
 ## install (other ways)
 
 grab a binary for macOS, Linux or Windows from [releases](https://github.com/usetrmnl/cli/releases), or:
