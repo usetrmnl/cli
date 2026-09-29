@@ -31,15 +31,7 @@ func main() {
 			BaseURL: baseURL,
 			SpecURL: baseURL + "/api-docs/openapi.json",
 			Profiles: map[string]*restish.ProfileConfig{
-				"default": {Credentials: map[string]*config.CredentialConfig{"bearer_auth": {Auth: &restish.AuthConfig{
-					Type: "oauth-authorization-code",
-					Params: map[string]string{
-						"client_id":     "trmnl-cli",
-						"authorize_url": baseURL + "/oidc/authorize",
-						"token_url":     baseURL + "/oidc/token",
-						"scopes":        "read content devices delete profile apps",
-					},
-				}}}},
+				"default": {Credentials: map[string]*config.CredentialConfig{"bearer_auth": {Auth: auth(baseURL)}}},
 			},
 		},
 	}})
@@ -61,5 +53,21 @@ func envOr(key, fallback string) string {
 func setenvIfUnset(key, value string) {
 	if os.Getenv(key) == "" {
 		os.Setenv(key, value)
+	}
+}
+
+// An account API key (TRMNL_API_KEY) suits scripts and CI; without one, the CLI signs in through the browser.
+func auth(baseURL string) *restish.AuthConfig {
+	if apiKey := os.Getenv("TRMNL_API_KEY"); apiKey != "" {
+		return &restish.AuthConfig{Type: "bearer", Params: map[string]string{"token": apiKey}}
+	}
+	return &restish.AuthConfig{
+		Type: "oauth-authorization-code",
+		Params: map[string]string{
+			"client_id":     "trmnl-cli",
+			"authorize_url": baseURL + "/oidc/authorize",
+			"token_url":     baseURL + "/oidc/token",
+			"scopes":        "read content devices delete profile apps",
+		},
 	}
 }

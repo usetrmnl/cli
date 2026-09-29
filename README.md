@@ -23,6 +23,17 @@ trmnl list-playlist-items
 
 changed your mind about access? remove "TRMNL CLI" from [Connected agents](https://trmnl.com/account) any time.
 
+## scripts + CI
+
+no browser? no problem. create an API key under [Account > API keys](https://trmnl.com/account), give it only the capabilities it needs, then:
+
+```sh
+export TRMNL_API_KEY=trmnl_xxxxx
+trmnl list-devices
+```
+
+when `TRMNL_API_KEY` is set the CLI uses it and skips the browser entirely.
+
 ## install (other ways)
 
 grab a binary for macOS, Linux or Windows from [releases](https://github.com/usetrmnl/cli/releases), or:
@@ -45,6 +56,6 @@ go install github.com/usetrmnl/cli/cmd/trmnl@latest
 
 ## contributing
 
-this repo is ~65 lines of Go. most "feature requests" for the CLI are really API requests, so if a command is missing or clunky, tell us what you're trying to do and we'll improve the endpoint. everyone wins.
+this repo is ~80 lines of Go. most "feature requests" for the CLI are really API requests, so if a command is missing or clunky, tell us what you're trying to do and we'll improve the endpoint. everyone wins.
 
 releases: push a `v*` tag and GoReleaser does the rest. Dependabot keeps Restish fresh.

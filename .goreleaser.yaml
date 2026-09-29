@@ -1,4 +1,9 @@
 version: 2
+project_name: trmnl
+before:
+  hooks:
+    # Each release carries the licenses of the modules compiled into it.
+    - go run github.com/google/go-licenses/v2@v2.0.1 save ./cmd/trmnl --save_path=third_party_licenses --ignore github.com/usetrmnl/cli --force
 builds:
   - main: ./cmd/trmnl
     binary: trmnl
@@ -8,6 +13,7 @@ builds:
     ldflags: -s -w -X main.version={{.Version}}
 archives:
   - formats: [tar.gz]
+    files: [LICENSE, README.md, third_party_licenses/**/*]
     format_overrides:
       - goos: windows
         formats: [zip]
