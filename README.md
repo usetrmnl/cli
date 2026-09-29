@@ -60,4 +60,16 @@ go install github.com/usetrmnl/cli/cmd/trmnl@latest
 
 this repo is ~80 lines of Go. most "feature requests" for the CLI are really API requests, so if a command is missing or clunky, tell us what you're trying to do and we'll improve the endpoint. everyone wins.
 
-releases: push a `v*` tag and GoReleaser does the rest. Dependabot keeps Restish fresh.
+Dependabot keeps Restish fresh. merge its PRs, then cut a release.
+
+## releasing
+
+```sh
+bin/release 0.2.0
+```
+
+that's it. the script checks you're on a clean, pushed `master`, tags `v0.2.0`, waits for GoReleaser to build every binary + update the [Homebrew cask](https://github.com/usetrmnl/homebrew-tap), then prints the release link. run it with no version to see the latest one. needs [`gh`](https://cli.github.com) logged in.
+
+picking a number: bump the last digit for fixes + Restish updates, the middle one for anything a user would notice.
+
+if a release goes red on the cask step, the `HOMEBREW_TAP_TOKEN` secret expired. make a new [fine-grained token](https://github.com/settings/personal-access-tokens/new) (owner `usetrmnl`, only `usetrmnl/homebrew-tap`, contents read + write), then `gh secret set HOMEBREW_TAP_TOKEN -R usetrmnl/cli` and paste it when asked. then start that version over: `gh release delete v0.2.0 --cleanup-tag -y && bin/release 0.2.0`.

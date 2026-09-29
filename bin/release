@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+# Tags a release and waits for GoReleaser to publish it. Usage: bin/release 0.2.0
+set -euo pipefail
+
+version="${1:-}"
+latest="$(git tag --list 'v*' --sort=-v:refname | head -1)"
+if [[ ! "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+  echo "usage: bin/release X.Y.Z  (latest: $latest)" >&2
+  exit 1
+fi
+tag="v$version"
+
+git fetch --quiet --tags origin master
+[[ "$(git branch --show-current)" == "master" ]] || { echo "switch to master first" >&2; exit 1; }
+[[ -z "$(git status --porcelain)" ]] || { echo "commit or discard your changes first" >&2; exit 1; }
+[[ "$(git rev-parse HEAD)" == "$(git rev-parse origin/master)" ]] || { echo "master is not in sync with origin, pull or push first" >&2; exit 1; }
+! git rev-parse --quiet --verify "refs/tags/$tag" >/dev/null || { echo "$tag already exists" >&2; exit 1; }
+
+go vet ./...
+go build -o /dev/null ./cmd/trmnl
+
+git tag -a "$tag" -m "$tag"
+git push --quiet origin "$tag"
+echo "pushed $tag, waiting for the release build..."
+
+sleep 10
+run_id="$(gh run list --workflow release.yml --branch "$tag" --limit 1 --json databaseId --jq '.[0].databaseId')"
+gh run watch "$run_id" --exit-status --interval 15 >/dev/null
+
+echo "released: $(gh release view "$tag" --json url --jq .url)"
+echo "check it: brew update && brew upgrade usetrmnl/tap/trmnl && trmnl version"
