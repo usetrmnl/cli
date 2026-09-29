@@ -15,6 +15,7 @@ homebrew_casks:
   - name: trmnl
     description: The TRMNL API as a command line
     homepage: https://github.com/usetrmnl/cli
+    license: MIT
     repository:
       owner: usetrmnl
       name: homebrew-tap
