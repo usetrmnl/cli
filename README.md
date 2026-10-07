@@ -53,8 +53,10 @@ go install github.com/usetrmnl/cli/cmd/trmnl@latest
 
 ## looking for something else?
 
-- building a plugin: [trmnlp](https://github.com/usetrmnl/trmnlp) previews your markup locally
-- letting an AI agent drive: our [MCP server + agent skills](https://github.com/usetrmnl/trmnl-agent-skills)
+- the full guide, with sign in and API keys: the [TRMNL CLI help article](https://help.trmnl.com/en/articles/17226209-trmnl-cli)
+- an API key for scripts and CI: [Account API Keys](https://help.trmnl.com/en/articles/11195228-account-api-keys)
+- building a plugin: [trmnlp](https://github.com/usetrmnl/trmnlp) previews your markup locally, and [Private Plugins](https://help.trmnl.com/en/articles/9510536-private-plugins) covers the basics
+- letting an AI agent drive: the [MCP Server help article](https://help.trmnl.com/en/articles/17432548-mcp-server) and our [agent skills](https://github.com/usetrmnl/trmnl-agent-skills)
 
 ## contributing
 
